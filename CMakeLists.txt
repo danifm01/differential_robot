@@ -17,9 +17,11 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+
+add_executable(const_velocity_node src/const_velocity_node.cpp)
+ament_target_dependencies(const_velocity_node rclcpp geometry_msgs)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -35,6 +37,11 @@ endif()
 install(
   DIRECTORY description launch configuration
   DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  TARGETS const_velocity_node
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()

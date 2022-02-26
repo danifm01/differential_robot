@@ -35,7 +35,8 @@ def generate_launch_description():
                                       output='screen',
                                       parameters=[params])
 
-    rviz_config_path = os.path.join(pkg_path, 'configuration', 'rviz2_diff_robot.rviz')
+    rviz_config_path = os.path.join(
+        pkg_path, 'configuration', 'rviz2_diff_robot.rviz')
     node_rviz2 = Node(package='rviz2',
                       executable='rviz2',
                       output='log',
@@ -51,6 +52,8 @@ def generate_launch_description():
                         arguments=['-topic', 'robot_description',
                                    '-entity', 'my_robot'])
 
+    constant_vel = Node(package='diff_robot',
+                        executable='const_velocity_node')
 
     # Launch!
     return LaunchDescription([
@@ -60,5 +63,6 @@ def generate_launch_description():
         node_robot_state_publisher,
         gazebo,
         node_rviz2,
-        gazebo_spawn
+        gazebo_spawn,
+        constant_vel
     ])
