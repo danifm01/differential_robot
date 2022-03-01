@@ -55,6 +55,10 @@ def generate_launch_description():
     constant_vel = Node(package='diff_robot',
                         executable='const_velocity_node')
 
+    odom_frame_tf = Node(package='tf2_ros',
+                         executable='static_transform_publisher',
+                         arguments=['0 0 0 0 0 0 odom base_link'])
+
     # Launch!
     return LaunchDescription([
         DeclareLaunchArgument('use_sim_time',
@@ -64,5 +68,6 @@ def generate_launch_description():
         gazebo,
         node_rviz2,
         gazebo_spawn,
-        constant_vel
+        # constant_vel,
+        odom_frame_tf
     ])

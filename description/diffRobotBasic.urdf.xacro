@@ -1,14 +1,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="MyRobot">
     <xacro:include filename="baseInertial.xacro" />
 
-    <link name="dummy_link">
-    </link>
-
-    <joint name="dummy_join" type="fixed">
-        <parent link="dummy_link"/>
-        <child link="base_link"/>
-    </joint>
-
     <link name="base_link">
         <xacro:basic_box mass="1." x="1." y="0.7" z="0.2" r="1" g="0" b="0">
             <origin xyz="0.3 0.0 0.0"/>
@@ -62,7 +54,7 @@
         <parent link="base_link"/>
         <child link="head_link"/>
     </joint>
-
+<!--
     <gazebo>
         <plugin name="gazebo_ros_joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
             <update_rate>1</update_rate>
@@ -70,6 +62,7 @@
             <joint_name>base_wheelR_joint</joint_name>
         </plugin>
     </gazebo>
+-->
     <gazebo reference="base_link">
         <material> Gazebo/Red </material>
     </gazebo>
@@ -111,8 +104,8 @@
             <publish_wheel_tf>true</publish_wheel_tf>
 
             <odometry_topic>odom</odometry_topic>
-            <odometry_frame>base_link</odometry_frame>
-            <robot_base_frame>base_link</robot_base_frame>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_link</robot_base_frame> 
         </plugin>
     </gazebo>
 </robot>
