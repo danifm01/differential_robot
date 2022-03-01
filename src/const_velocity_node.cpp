@@ -14,7 +14,6 @@ class ConstantVelocityControl : public rclcpp::Node
             geometry_msgs::msg::Twist vel;
             vel.linear.x = 0.1;
             this->publisher->publish(vel);
-            RCLCPP_INFO(this->get_logger(), "prueba2");
             return;
         };
     public:
