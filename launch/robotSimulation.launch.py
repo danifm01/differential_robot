@@ -1,3 +1,5 @@
+from ast import arguments
+from inspect import Parameter
 import os
 
 from ament_index_python.packages import get_package_share_directory
@@ -45,7 +47,8 @@ def generate_launch_description():
     gazebo_launch_path = os.path.join(get_package_share_directory(
         'gazebo_ros'), 'launch', 'gazebo.launch.py')
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(gazebo_launch_path))
+        PythonLaunchDescriptionSource(gazebo_launch_path),
+        launch_arguments={'world': os.path.join(pkg_path, 'description', 'world', 'My_laberynth1.world')}.items())
 
     gazebo_spawn = Node(package='gazebo_ros',
                         executable='spawn_entity.py',
